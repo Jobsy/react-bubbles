@@ -22,7 +22,7 @@ const Login = (props) => {
       .then(res => {
         // debugger
         localStorage.setItem("token", res.data.payload)
-       
+        props.history.push("/bubblePage");
       });
   };
   return (
