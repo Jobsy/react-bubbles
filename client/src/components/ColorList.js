@@ -30,7 +30,7 @@ const ColorList = ({ colors, updateColors }) => {
     axiosWithAuth().put(`${colorURL}/${colorToEdit.id}`, {
       color: colorToEdit.color,
       code: {
-        hex: "#00ffff"
+        hex: colorToEdit.code.hex,
       },
       id: colorToEdit.id
     })
