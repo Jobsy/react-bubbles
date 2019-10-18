@@ -6,7 +6,7 @@ import "./styles.scss";
 import BubblePage from "./components/BubblePage";
 import { withAuthCkeck } from "./components/withAuthCkeck";
 
-function App() {
+export function App() {
   return (
     <Router>
       <div className="App">
@@ -25,4 +25,6 @@ function App() {
   );
 }
 
-export default App;
+// export default App;
+export default withRouter(App);
+
