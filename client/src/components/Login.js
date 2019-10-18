@@ -1,4 +1,4 @@
-import React, {useRef} from "react";
+import React, { useRef } from "react";
 import axios from "axios";
 
 const Login = (props) => {
@@ -20,7 +20,6 @@ const Login = (props) => {
       password: passwordRef.current.value,
     })
       .then(res => {
-        // debugger
         localStorage.setItem("token", res.data.payload)
         props.history.push("/bubblePage");
       });
@@ -31,20 +30,26 @@ const Login = (props) => {
       <br />
       <p>Build a login page here</p>
       <br />
-
       <div>
-                Username <input ref={userNameRef} type="
-                text" />
-                <br />
+        Username
+        <input
+          ref={userNameRef}
+          type="text"
+        />
+        <br />
 
-                Password  <input ref={passwordRef} type="
-                text" />
-                <br />
-            </div>
-
-            <div>
-                <button onClick={submit}>Login</button>
-            </div>
+        Password
+         <input
+          ref={passwordRef}
+          type="text"
+        />
+        <br />
+        <br />
+      </div>
+      
+      <div>
+        <button onClick={submit}>Login</button>
+      </div>
     </div>
   );
 };
