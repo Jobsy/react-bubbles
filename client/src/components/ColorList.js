@@ -42,6 +42,28 @@ const ColorList = ({ colors, updateColors }) => {
       });
   };
 
+  const addNewColor = e => {
+    e.preventDefault();
+    // Make a put request to save your updated color
+    // think about where will you get the id from...
+    // where is is saved right now?
+
+    axiosWithAuth().post(`${colorURL}`, {
+      color: colorToEdit.color,
+      code: {
+        hex: colorToEdit.code.hex,
+      },
+      // id: colorToEdit.id
+    })
+      .then((res) => {
+        console.log("ddd: ", res.data)
+      })
+      .catch(err => {
+
+      });
+  };
+
+
   const deleteColor = id => {
 
     axiosWithAuth().delete(`${colorURL}/${id}`)
@@ -71,7 +93,7 @@ const ColorList = ({ colors, updateColors }) => {
         ))}
       </ul>
       {editing && (
-        <form onSubmit={saveEdit}>
+        <form onSubmit={addNewColor}>
           <legend>edit color</legend>
           <label>
             color name:
@@ -117,6 +139,51 @@ const ColorList = ({ colors, updateColors }) => {
       )}
       <div className="spacer" />
       {/* stretch - build another form here to add a color */}
+
+
+      <form onSubmit={addNewColor}>
+        <legend>Add color</legend>
+        <label>
+          color name:
+            <input
+            onChange={e =>
+              setColorToEdit({
+                ...colorToEdit,
+                color: e.target.value
+              })
+            }
+            value={colorToEdit.color}
+          />
+        </label>
+        <label>
+          hex code:
+            <input
+            onChange={e =>
+              setColorToEdit({
+                ...colorToEdit,
+                code: { hex: e.target.value }
+              })
+            }
+            value={colorToEdit.code.hex}
+          />
+        </label>
+        {/* <label>
+          ID:
+            <input
+            onChange={e =>
+              setColorToEdit({
+                ...colorToEdit,
+                id: e.target.value
+              })
+            }
+            value={colorToEdit.id}
+          />
+        </label> */}
+        <div className="button-row">
+          <button type="submit">Add</button>
+          {/* <button onClick={() => setEditing(false)}>cancel</button> */}
+        </div>
+      </form>
     </div>
   );
 };
