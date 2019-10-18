@@ -1,8 +1,10 @@
 import React, { useState } from "react";
-import { BrowserRouter as Router, Route } from "react-router-dom";
+import { BrowserRouter as Router, Route, withRouter } from "react-router-dom";
 
 import Login from "./components/Login";
 import "./styles.scss";
+import BubblePage from "./components/BubblePage";
+import { withAuthCkeck } from "./components/withAuthCkeck";
 
 function App() {
   return (
@@ -13,6 +15,11 @@ function App() {
           Build a PrivateRoute component that will 
           display BubblePage when you're authenticated 
         */}
+         <Route
+          exact
+          path="/bubblePage"
+          render={props => withAuthCkeck(BubblePage, props)}
+        />
       </div>
     </Router>
   );
