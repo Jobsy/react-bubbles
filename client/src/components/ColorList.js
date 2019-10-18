@@ -15,6 +15,7 @@ const ColorList = ({ colors, updateColors }) => {
   console.log(colors);
   const [editing, setEditing] = useState(false);
   const [colorToEdit, setColorToEdit] = useState(initialColor);
+  console.log("))))): ", colorToEdit)
 
   const editColor = color => {
     setEditing(true);
@@ -26,6 +27,20 @@ const ColorList = ({ colors, updateColors }) => {
     // Make a put request to save your updated color
     // think about where will you get the id from...
     // where is is saved right now?
+    axiosWithAuth().put(`${colorURL}/${colorToEdit.id}`, {
+      color: colorToEdit.color,
+      code: {
+        hex: "#00ffff"
+      },
+      id: colorToEdit.id
+    })
+      .then((res) => {
+        console.log("ddd: ", res.data)
+        // updateColors(colorToEdit)
+      })
+      .catch(err => {
+
+      });
   };
 
   const deleteColor = id => {
@@ -65,7 +80,10 @@ const ColorList = ({ colors, updateColors }) => {
             color name:
             <input
               onChange={e =>
-                setColorToEdit({ ...colorToEdit, color: e.target.value })
+                setColorToEdit({
+                  ...colorToEdit,
+                  color: e.target.value
+                })
               }
               value={colorToEdit.color}
             />
@@ -80,6 +98,18 @@ const ColorList = ({ colors, updateColors }) => {
                 })
               }
               value={colorToEdit.code.hex}
+            />
+          </label>
+          <label>
+            ID:
+            <input
+              onChange={e =>
+                setColorToEdit({
+                  ...colorToEdit,
+                  id: e.target.value
+                })
+              }
+              value={colorToEdit.id}
             />
           </label>
           <div className="button-row">
